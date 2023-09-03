@@ -159,7 +159,7 @@ function getBook(id) {
 
 const books = getBooks();
 const x = [1, 2, 3, 4, 5].map(el => el * 2);
-x
+console.log(x);
 
 const titles = books.map(book => book.title);
 titles
@@ -169,15 +169,33 @@ const essentialData = books.map(book => ({
   author: book.author
 }));
 
-essentialData
+console.log(essentialData);
 
 const longBooks = books.filter(book => book.pages > 500);
 
 
 const nums = [3, 7, 1, 9, 6];
 const sorted = nums.slice().sort((a, b) => a - b);
-nums
-sorted
+console.log(nums);
+console.log(sorted);
 
 const sortedByPages = books.slice().sort((a, b) => b.pages - a.pages);
 sortedByPages
+
+// 1) Add a book object to array
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the Chamber of Secrets",
+  author: "J.K Rowling"
+};
+
+const booksAfterAdd = [...books, newBook];
+console.log(booksAfterAdd)
+
+// 2) Delete book object from array
+const booksAfterDelete = booksAfterAdd.filter(book => book.id !== 3);
+console.log(booksAfterDelete.length)
+
+// 3) update book object in the array
+const booksAfterUpdate = booksAfterDelete.map(book => book.id === 1 ? {...book, pages: 1210 } : book);
+booksAfterUpdate
