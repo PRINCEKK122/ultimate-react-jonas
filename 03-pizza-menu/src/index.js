@@ -17,7 +17,7 @@ const pizzaData = [
     ingredients: "Tomato and mozarella",
     price: 10,
     photoName: "pizzas/margherita.jpg",
-    soldOut: false,
+    soldOut: true,
   },
   {
     name: "Pizza Spinaci",
@@ -115,10 +115,7 @@ function Footer() {
   return (
     <footer className="footer">
       {isOpen ? (
-        <div className="order">
-          <p>We're open until {closeHour}:00. Come visit us or order online.</p>
-          <button className="btn">Order</button>
-        </div>
+        <Order closeHour={closeHour} />
       ) : (
         <p>
           We're happy to welcome you between {openHour}:00 and {closeHour}:00
@@ -128,15 +125,22 @@ function Footer() {
   );
 }
 
+function Order(props) {
+  return <div className="order">
+  <p>We're open until {props.closeHour}:00. Come visit us or order online.</p>
+  <button className="btn">Order</button>
+</div>
+}
+
 function Pizza(props) {
-  if (props.pizzaObj.soldOut) return null;
+  // if (props.pizzaObj.soldOut) return null;
 
   return (
-    <li className="pizza">
+    <li className={`pizza ${props.pizzaObj.soldOut ? "sold-out": ""}`}>
       <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <h3>{props.pizzaObj.name}</h3>
       <p>{props.pizzaObj.ingredient}</p>
-      <span>{props.pizzaObj.price + 3}</span>
+      <span>{props.pizzaObj.soldOut ? "SOLD OUT" : props.pizzaObj.price + 3}</span>
     </li>
   );
 }

@@ -133,7 +133,7 @@ const data = [
       },
     },
   },
-]; 
+];
 
 function getBooks() {
   return data;
@@ -142,7 +142,6 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
-
 
 // Destructing
 // const book = getBook(2);
@@ -158,21 +157,20 @@ function getBook(id) {
 // updatedBook
 
 const books = getBooks();
-const x = [1, 2, 3, 4, 5].map(el => el * 2);
+const x = [1, 2, 3, 4, 5].map((el) => el * 2);
 console.log(x);
 
-const titles = books.map(book => book.title);
-titles
+const titles = books.map((book) => book.title);
+titles;
 
-const essentialData = books.map(book => ({
+const essentialData = books.map((book) => ({
   title: book.title,
-  author: book.author
+  author: book.author,
 }));
 
 console.log(essentialData);
 
-const longBooks = books.filter(book => book.pages > 500);
-
+const longBooks = books.filter((book) => book.pages > 500);
 
 const nums = [3, 7, 1, 9, 6];
 const sorted = nums.slice().sort((a, b) => a - b);
@@ -180,22 +178,40 @@ console.log(nums);
 console.log(sorted);
 
 const sortedByPages = books.slice().sort((a, b) => b.pages - a.pages);
-sortedByPages
+sortedByPages;
 
 // 1) Add a book object to array
 const newBook = {
   id: 6,
   title: "Harry Potter and the Chamber of Secrets",
-  author: "J.K Rowling"
+  author: "J.K Rowling",
 };
 
 const booksAfterAdd = [...books, newBook];
-console.log(booksAfterAdd)
+console.log(booksAfterAdd);
 
 // 2) Delete book object from array
-const booksAfterDelete = booksAfterAdd.filter(book => book.id !== 3);
-console.log(booksAfterDelete.length)
+const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 3);
+console.log(booksAfterDelete.length);
 
 // 3) update book object in the array
-const booksAfterUpdate = booksAfterDelete.map(book => book.id === 1 ? {...book, pages: 1210 } : book);
-booksAfterUpdate
+const booksAfterUpdate = booksAfterDelete.map((book) =>
+  book.id === 1 ? { ...book, pages: 1210 } : book
+);
+booksAfterUpdate;
+
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then((res) => res.json())
+//   .then((data) => console.log(data));
+// console.log("jonas");
+
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+
+  return data;
+}
+
+const todos = getTodos();
+console.log(todos);
+console.log("Prince");
