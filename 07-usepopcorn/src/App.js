@@ -115,6 +115,7 @@ export default function App() {
         return;
       }
 
+      handleCloseMovie();
       fetchMovies();
     },
     [query]
@@ -290,6 +291,22 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   } = movie;
 
   // console.log(title, year);
+  useEffect(
+    function () {
+      function callback(e) {
+        if (e.code === "Escape") {
+          onCloseMovie();
+          console.log("CLOSING");
+        }
+      }
+      document.addEventListener("keydown", callback);
+
+      return function () {
+        document.removeEventListener("keydown", callback);
+      };
+    },
+    [onCloseMovie]
+  );
 
   useEffect(
     function () {
@@ -312,6 +329,10 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     function () {
       if (!title) return;
       document.title = `Movie | ${title}`;
+
+      return function () {
+        document.title = "usePopcorn";
+      };
     },
     [title]
   );
